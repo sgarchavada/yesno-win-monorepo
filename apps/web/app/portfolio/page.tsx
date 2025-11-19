@@ -33,6 +33,8 @@ export default function PortfolioPage() {
     }
 
     async function fetchPortfolio() {
+      if (!account?.address) return;
+      
       setIsLoading(true);
       
       try {
