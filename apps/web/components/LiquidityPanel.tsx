@@ -307,7 +307,7 @@ export function LiquidityPanel({ market: legacyMarket }: LiquidityPanelProps) {
         const factoryContract = getContract({
           client,
           chain: defineChain(parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || "84532")),
-          address: process.env.NEXT_PUBLIC_MARKET_FACTORY_ADDRESS!,
+          address: process.env.NEXT_PUBLIC_MARKET_FACTORY_ADDRESS! as `0x${string}`,
         });
         
         const addLiqTx = prepareContractCall({

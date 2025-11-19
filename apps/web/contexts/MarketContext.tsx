@@ -52,7 +52,7 @@ export function MarketProvider({
 
       const marketContract = getContract({
         client,
-        address: marketAddress,
+        address: marketAddress as `0x${string}`,
         chain: defineChain(84532),
       });
 

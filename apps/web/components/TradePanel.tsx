@@ -116,7 +116,7 @@ export function TradePanel({ market }: TradePanelProps) {
             const tokenContract = getContract({
               client,
               chain: baseSepolia,
-              address: tokenAddress,
+              address: tokenAddress as `0x${string}`,
             });
             
             const balance = await readContract({
@@ -166,7 +166,7 @@ export function TradePanel({ market }: TradePanelProps) {
           try {
             const marketContract = getContract({
               client,
-              address: market.address,
+              address: market.address as `0x${string}`,
               chain: defineChain(84532),
             });
             
@@ -174,7 +174,7 @@ export function TradePanel({ market }: TradePanelProps) {
             const outcomeTokenAddress = market.outcomeTokens[selectedOutcome];
             const outcomeTokenContract = getContract({
               client,
-              address: outcomeTokenAddress,
+              address: outcomeTokenAddress as `0x${string}`,
               chain: defineChain(84532),
             });
             
@@ -342,7 +342,7 @@ export function TradePanel({ market }: TradePanelProps) {
         const factoryContract = getContract({
           client,
           chain: defineChain(parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || "84532")),
-          address: process.env.NEXT_PUBLIC_MARKET_FACTORY_ADDRESS!,
+          address: process.env.NEXT_PUBLIC_MARKET_FACTORY_ADDRESS! as `0x${string}`,
         });
         
         const buyTx = prepareContractCall({

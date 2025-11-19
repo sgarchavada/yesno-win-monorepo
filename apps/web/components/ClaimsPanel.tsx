@@ -59,7 +59,7 @@ export function ClaimsPanel({ market }: ClaimsPanelProps) {
         if (market.status === 3) {
           let totalRefund = BigInt(0);
           const marketContract = getContract({
-            address: market.address,
+            address: market.address as `0x${string}`,
             chain: defineChain(84532),
             client,
           });
