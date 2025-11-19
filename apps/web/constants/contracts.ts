@@ -37,20 +37,13 @@ export const getPredictionMarketContract = () => getContract({
     chain: baseSepolia,
 });
 
-// For backward compatibility - getter functions that create contracts on demand
-export const getTokenContractLegacy = () => tokenContractAddress ? getContract({
-    client: client,
-    address: toAddress(tokenContractAddress),
-    chain: baseSepolia,
-}) : null;
+// Deprecated: These are only for backward compatibility with existing code
+// They are initialized as null and should be replaced with getter functions
+export let tokenContract: ReturnType<typeof getContract> | null = null;
+export let predictionMarketContract: ReturnType<typeof getContract> | null = null;
 
-export const getPredictionMarketContractLegacy = () => getContract({
-    client: client,
-    address: toAddress(predictionContractAddress),
-    chain: baseSepolia,
-});
-
-// Deprecated: Use getter functions above to avoid SSR issues
-// These return null during SSR/build to prevent validation errors
-export const tokenContract = typeof window !== 'undefined' ? getTokenContractLegacy() : null;
-export const predictionMarketContract = typeof window !== 'undefined' ? getPredictionMarketContractLegacy() : null;
+// Initialize contracts on client side only
+if (typeof window !== 'undefined') {
+  tokenContract = getTokenContract();
+  predictionMarketContract = getPredictionMarketContract();
+}
