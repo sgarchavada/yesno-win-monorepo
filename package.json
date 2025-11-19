@@ -4,10 +4,10 @@
   "private": true,
   "description": "YesNo.Win - Polymarket-style prediction market on Base",
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "dev:web": "pnpm --filter web dev",
+    "dev": "cd apps/web-vite && npm run dev",
+    "dev:web": "cd apps/web-vite && npm run dev",
     "build": "pnpm build:contracts && pnpm build:sdk && pnpm -r build",
-    "build:web": "pnpm --filter web build",
+    "build:web": "cd apps/web-vite && npm run build",
     "build:contracts": "pnpm --filter contracts build",
     "build:sdk": "pnpm --filter sdk generate",
     "test": "pnpm test:contracts",
