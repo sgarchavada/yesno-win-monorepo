@@ -18,13 +18,9 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@contracts": ["../../packages/contracts/src"],
-      "@sdk": ["../../packages/sdk/src"],
-      "@sdk/*": ["../../packages/sdk/src/*"],
-      "@utils": ["../../packages/utils/src"],
-      "@utils/*": ["../../packages/utils/src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": [
