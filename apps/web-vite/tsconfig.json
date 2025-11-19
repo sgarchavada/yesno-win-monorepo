@@ -6,8 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["vite/client"],
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
@@ -17,23 +15,18 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
-    /* Path aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-
-    /* Linting */
     "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    
-    /* JavaScript Support */
+    "noFallthroughCasesInSwitch": false,
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
 }
