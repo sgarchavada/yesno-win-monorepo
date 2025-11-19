@@ -20,7 +20,7 @@ cache/
 artifacts/
 out/
 typechain-types/
-lib/
+packages/contracts/lib/
 
 # Environment
 .env
