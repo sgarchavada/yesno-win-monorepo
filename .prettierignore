@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+dist
+build
+cache
+artifacts
+typechain-types
+coverage
+*.min.js
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+

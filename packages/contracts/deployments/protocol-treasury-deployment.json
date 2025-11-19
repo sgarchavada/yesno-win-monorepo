@@ -1,0 +1,13 @@
+{
+  "network": "base-sepolia",
+  "timestamp": "2025-11-01T12:01:26.634Z",
+  "deployer": "0x297d01e65E319bfF025a60Bd710811724c7c2589",
+  "contracts": {
+    "protocolTreasury": {
+      "proxy": "0x8b17d36e583e55fFd10c84B480bF63F1Cc1D9e98",
+      "implementation": "0xD0346eC8F8a35a2d813AE95F403c46214906852a"
+    },
+    "marketFactory": "0x85212aC505cb9Ae8e89ECf47CE57166401eBf3F6",
+    "treasury": "0x57a195CF18ba3BB183263Bd71080146e8106C474"
+  }
+}

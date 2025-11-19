@@ -1,0 +1,19 @@
+{
+  "network": "base-sepolia",
+  "timestamp": "2025-11-01T11:47:26.862Z",
+  "deployer": "0x297d01e65E319bfF025a60Bd710811724c7c2589",
+  "contracts": {
+    "marketFactory": {
+      "proxy": "0x85212aC505cb9Ae8e89ECf47CE57166401eBf3F6",
+      "implementation": "0x5eB00fD9f1Be128843a0ce7a4114710D21A1405F"
+    },
+    "oracleAdapter": "0x27B73eAC5682dB956D750c6D78Ce30De78BFb771",
+    "collateralToken": "0x036CbD53842c5426634e7929541eC2318f3dCF7e"
+  },
+  "configuration": {
+    "lpFeeBps": 150,
+    "protocolFeeBps": 50,
+    "parlayFeeBps": 100,
+    "minInitialLiquidity": 100000000
+  }
+}

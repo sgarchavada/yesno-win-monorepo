@@ -1,0 +1,26 @@
+{
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "deployedAt": "2025-11-01T00:00:00.000Z",
+  "deployer": "0x297d01e65E319bfF025a60Bd710811724c7c2589",
+  "contracts": {
+    "implementations": {
+      "Market": "0x1415A295aAD3c9e41aA095b6692DBd571cCAD71d",
+      "OutcomeToken": "0x5eB00fD9f1Be128843a0ce7a4114710D21A1405F",
+      "LPToken": "0x85212aC505cb9Ae8e89ECf47CE57166401eBf3F6",
+      "OracleAdapter": "0xD0346eC8F8a35a2d813AE95F403c46214906852a",
+      "MarketFactory": "0x8b17d36e583e55fFd10c84B480bF63F1Cc1D9e98"
+    },
+    "proxies": {
+      "OracleAdapter": "0x27B73eAC5682dB956D750c6D78Ce30De78BFb771",
+      "MarketFactory": "0xEF331Fd238191963c1459810Ca10C509fd7B2BBD"
+    }
+  },
+  "configuration": {
+    "collateralToken": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+    "lpFeeBps": 150,
+    "protocolFeeBps": 50,
+    "parlayFeeBps": 100,
+    "minInitialLiquidity": "100000000"
+  }
+}

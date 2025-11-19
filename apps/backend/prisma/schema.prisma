@@ -1,0 +1,186 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User wallet addresses
+model User {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  positions UserPosition[]
+  trades    Trade[]
+  lpActions LPAction[]
+  claims    Claim[]
+
+  @@index([address])
+}
+
+// Markets
+model Market {
+  id                      String   @id @default(cuid())
+  address                 String   @unique
+  question                String
+  outcomes                String[] // JSON array of outcome names
+  creator                 String
+  endTime                 DateTime
+  status                  Int      // 0=ACTIVE, 1=CLOSED, 2=RESOLVED, 3=CANCELED
+  winningOutcome          Int?
+  totalReserves           String   // BigInt as string
+  reserves                String[] // Array of reserves per outcome
+  accumulatedFees         String
+  accumulatedProtocolFees String
+  totalVolume             String   @default("0")
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  finalized               Boolean  @default(false)
+  finalizedAt             DateTime?
+
+  positions UserPosition[]
+  trades    Trade[]
+  lpActions LPAction[]
+  claims    Claim[]
+
+  @@index([address])
+  @@index([status])
+  @@index([creator])
+  @@index([endTime])
+}
+
+// User positions in markets (outcome tokens + LP tokens)
+model UserPosition {
+  id        String   @id @default(cuid())
+  userId    String
+  marketId  String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market    Market   @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  
+  // Outcome token balances (array indexed by outcome)
+  outcomeBalances String[] // BigInt as string for each outcome
+  
+  // LP token balance
+  lpBalance       String   @default("0")
+  
+  // Investment tracking
+  totalInvested   String   @default("0") // Total USDC invested
+  totalClaimed    String   @default("0") // Total USDC claimed
+  
+  // Flags for quick queries
+  hasOutcomeTokens Boolean @default(false)
+  hasLPTokens      Boolean @default(false)
+  hasClaimed       Boolean @default(false)
+  
+  lastActivity    DateTime @updatedAt
+  createdAt       DateTime @default(now())
+
+  @@unique([userId, marketId])
+  @@index([userId])
+  @@index([marketId])
+  @@index([hasOutcomeTokens])
+  @@index([hasLPTokens])
+  @@index([hasClaimed])
+}
+
+// Trade history
+model Trade {
+  id           String   @id @default(cuid())
+  userId       String
+  marketId     String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market       Market   @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  
+  txHash       String   @unique
+  outcome      Int
+  isBuy        Boolean
+  amount       String   // Collateral amount
+  tokensAmount String   // Outcome tokens amount
+  price        String   // Price at execution
+  fee          String   // Trading fee paid
+  
+  timestamp    DateTime @default(now())
+
+  @@index([userId])
+  @@index([marketId])
+  @@index([timestamp])
+  @@index([txHash])
+}
+
+// LP actions (add/remove liquidity)
+model LPAction {
+  id           String   @id @default(cuid())
+  userId       String
+  marketId     String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market       Market   @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  
+  txHash       String   @unique
+  isAdd        Boolean  // true = add, false = remove
+  collateralAmount String
+  lpTokenAmount    String
+  
+  timestamp    DateTime @default(now())
+
+  @@index([userId])
+  @@index([marketId])
+  @@index([timestamp])
+  @@index([txHash])
+}
+
+// Claims (winnings claimed)
+model Claim {
+  id           String   @id @default(cuid())
+  userId       String
+  marketId     String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  market       Market   @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  
+  txHash       String   @unique
+  outcome      Int
+  tokensAmount String   // Outcome tokens burned
+  payoutAmount String   // USDC received
+  
+  timestamp    DateTime @default(now())
+
+  @@index([userId])
+  @@index([marketId])
+  @@index([timestamp])
+  @@index([txHash])
+}
+
+// Event sync tracking
+model SyncState {
+  id            String   @id @default(cuid())
+  contractName  String   @unique
+  lastBlock     BigInt
+  lastTimestamp DateTime @updatedAt
+
+  @@index([contractName])
+}
+
+// Notifications queue
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // "unclaimed_funds", "market_resolved", "market_finalized"
+  marketId  String?
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  sent      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([read])
+  @@index([sent])
+  @@index([createdAt])
+}
+

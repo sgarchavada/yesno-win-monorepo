@@ -1,0 +1,99 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Contracts
+cache/
+artifacts/
+out/
+typechain-types/
+lib/
+
+# Environment
+.env
+.env.*
+.env*.local
+*.env.backup
+*.env.tmp
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+logs/
+*.log.*
+
+# Misc
+.turbo
+.vercel
+
+# Temporary/Helper files (not for production)
+*_COMPLETE.md
+*_STATUS.md
+*_SUMMARY.md
+*_GUIDE.md
+*_CONFIG.md
+*_REFACTOR_*.md
+*_BUGS.md
+*_DEPLOYMENT.md
+*_DILEMMA.md
+*_ANALYSIS.md
+*_COMPARISON.md
+START.md
+RAILWAY_CONFIG.md
+
+# Temporary shell scripts (keep only scripts/ folder)
+*.sh
+!scripts/*.sh
+!packages/contracts/script/*.sh
+
+# Backend specific
+apps/backend/logs/
+apps/backend/*.sh
+apps/backend/*_CONFIG.md
+apps/backend/START.md
+apps/backend/RAILWAY_CONFIG.md
+
+# Prisma Studio
+prisma/migrations/
+
+# Contract build artifacts
+packages/contracts/broadcast/
+packages/contracts/cache/
+packages/contracts/flattened/
+packages/contracts/flattened.sol
+packages/contracts/try-versions.txt
+packages/contracts/verify-*.sh
+packages/contracts/.DS_Store
+
+# Documentation (temporary analysis files)
+docs/*_REFACTOR_*.md
+docs/*_BUGS.md
+docs/*_DILEMMA.md
+docs/*_ANALYSIS.md
+docs/*_COMPARISON.md
+

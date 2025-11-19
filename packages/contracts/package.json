@@ -1,0 +1,34 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Solidity smart contracts for YesNo.Win prediction markets",
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test -vv",
+    "test:verbose": "forge test -vvv",
+    "test:gas": "forge test --gas-report",
+    "test:watch": "forge test --watch",
+    "coverage": "forge coverage --report lcov",
+    "coverage:html": "forge coverage --report html",
+    "format": "forge fmt",
+    "format:check": "forge fmt --check",
+    "clean": "forge clean",
+    "deploy": "ts-node script/deploy-all.ts",
+    "deploy:auto": "npm run deploy",
+    "deploy:base-sepolia": "bash script/deploy.sh",
+    "deploy:base-sepolia:verify": "bash script/deploy.sh --verify",
+    "post-deploy": "node script/post-deploy.js",
+    "deploy:thirdweb": "thirdweb deploy"
+  },
+  "devDependencies": {
+    "@thirdweb-dev/contracts": "^3.15.0",
+    "@types/node": "^20.10.0",
+    "axios": "^1.13.1",
+    "dotenv": "^16.6.1",
+    "ethers": "^6.15.0",
+    "thirdweb": "^5.68.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
