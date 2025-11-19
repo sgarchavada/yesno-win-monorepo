@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter, Urbanist } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -25,11 +26,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "yesno.win - Prediction Markets",
-  description: "Decentralized prediction markets platform built on blockchain",
-};
-
+// Metadata moved to head tags since we're using "use client"
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,6 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>yesno.win - Prediction Markets</title>
+        <meta name="description" content="Decentralized prediction markets platform built on blockchain" />
+      </head>
       <body
         className={`${inter.variable} ${urbanist.variable} ${geistMono.variable} antialiased scrollbar`}
       >
