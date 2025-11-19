@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { CheckCircle, AlertCircle, Loader2, Calendar } from "lucide-react";
 import { useSendAndConfirmTransaction } from "thirdweb/react";
 import { prepareContractCall, readContract } from "thirdweb";
-import { predictionMarketContract, predictionContractAddress } from "@/constants/contracts";
+import { getPredictionMarketContract, predictionContractAddress } from "@/constants/contracts";
 import { ConnectButton } from "thirdweb/react";
 import { client } from "@/app/client";
 import { baseSepolia } from "thirdweb/chains";
@@ -179,13 +179,8 @@ export default function CreateMarketForm({ onMarketCreated }: CreateMarketFormPr
       const startTimestamp = BigInt(Math.floor(new Date(formData.startTime).getTime() / 1000));
       const endTimestamp = BigInt(Math.floor(new Date(formData.endTime).getTime() / 1000));
 
-      // Get contract instance
-      const contract = predictionMarketContract;
-      if (!contract) {
-        throw new Error("Contract not initialized");
-      }
-
-      // Call createMarket on contract
+      // Get contract instance and call createMarket on contract
+      const contract = getPredictionMarketContract();
       const transaction = prepareContractCall({
         contract,
         method: "function createMarket(string _question, uint256 _startTime, uint256 _endTime, string _optionA, string _optionB, uint8 _resolutionType) returns (uint256 marketId)",

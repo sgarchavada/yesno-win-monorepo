@@ -37,13 +37,5 @@ export const getPredictionMarketContract = () => getContract({
     chain: baseSepolia,
 });
 
-// Deprecated: These are only for backward compatibility with existing code
-// They are initialized as null and should be replaced with getter functions
-export let tokenContract: ReturnType<typeof getContract> | null = null;
-export let predictionMarketContract: ReturnType<typeof getContract> | null = null;
-
-// Initialize contracts on client side only
-if (typeof window !== 'undefined') {
-  tokenContract = getTokenContract();
-  predictionMarketContract = getPredictionMarketContract();
-}
+// Removed: These should not be used directly anymore
+// All code should use the getter functions instead: getPredictionMarketContract() and getTokenContract()

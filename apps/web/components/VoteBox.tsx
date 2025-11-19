@@ -19,7 +19,7 @@ import { useSharesBalance } from "@/lib/hooks/useMarketData";
 import { useTokenData } from "@/lib/hooks/useTokenData";
 import { prepareContractCall } from "thirdweb";
 import { useSendAndConfirmTransaction } from "thirdweb/react";
-import { getPredictionContractByAddress, predictionMarketContract } from "@/constants/contracts";
+import { getPredictionContractByAddress, getPredictionMarketContract } from "@/constants/contracts";
 import { useToast } from "@/components/ui/toaster";
 
 interface VoteBoxProps {
@@ -306,10 +306,7 @@ export default function VoteBox({
                         if (!userHasShares || isRefunding) return;
                         setIsRefunding(true);
                         try {
-                          const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : predictionMarketContract;
-                          if (!contract) {
-                            throw new Error("Contract not initialized");
-                          }
+                          const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : getPredictionMarketContract();
                           const tx = prepareContractCall({
                             contract,
                             method: "function claimRefund(uint256 _marketId)",
@@ -337,10 +334,7 @@ export default function VoteBox({
                         if (!userHasWinnings || isClaiming) return;
                         setIsClaiming(true);
                         try {
-                          const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : predictionMarketContract;
-                          if (!contract) {
-                            throw new Error("Contract not initialized");
-                          }
+                          const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : getPredictionMarketContract();
                           const tx = prepareContractCall({
                             contract,
                             method: "function claimWinnings(uint256 _marketId)",
