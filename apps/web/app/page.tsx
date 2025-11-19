@@ -5,7 +5,7 @@
  * Displays all prediction markets in a grid layout
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Search, Plus, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { MarketCard } from "@/components/MarketCard";
@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 
 const MARKETS_PER_PAGE = 20;
 
-export default function HomePage() {
+function MarketListContent() {
   const { markets, setMarkets, isLoadingMarkets, setIsLoadingMarkets } = useMarketStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<"all" | "active" | "ended" | "resolved" | "canceled">("all");
@@ -23,8 +23,11 @@ export default function HomePage() {
   const [loadedCount, setLoadedCount] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  // Fetch initial markets
+  // Fetch initial markets (client-side only)
   useEffect(() => {
+    // Skip during SSR/SSG
+    if (typeof window === 'undefined') return;
+    
     async function fetchInitialMarkets() {
       setIsLoadingMarkets(true);
       
@@ -329,5 +332,27 @@ function EmptyState({ searchQuery }: { searchQuery: string }) {
         </Link>
       )}
     </div>
+  );
+}
+
+// Loading fallback component
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-[#0A0A0F] text-white pt-24 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="w-8 h-8 animate-spin text-[#00D1FF]" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Main export with Suspense boundary
+export default function HomePage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <MarketListContent />
+    </Suspense>
   );
 }
