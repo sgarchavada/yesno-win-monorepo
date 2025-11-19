@@ -9,7 +9,7 @@ export const tokenContractAddress = process.env.NEXT_PUBLIC_USDC_ADDRESS || "";
 
 export const predictionMarketContract = getContract({
     client: client,
-    address: predictionContractAddress,
+    address: predictionContractAddress as `0x${string}`,
     chain: baseSepolia,
 })
 
