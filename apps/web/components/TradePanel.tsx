@@ -737,7 +737,7 @@ export function TradePanel({ market }: TradePanelProps) {
       {activeTab === "sell" && outcomeBalances[selectedOutcome] === BigInt(0) && (
         <div className="flex items-center gap-2 text-yellow-400 text-sm bg-yellow-500/10 rounded-lg p-3 border border-yellow-500/20">
           <AlertCircle className="w-4 h-4" />
-          <span>You don't own any {market.outcomes[selectedOutcome]} tokens. Buy some first to sell.</span>
+          <span>You don&apos;t own any {market.outcomes[selectedOutcome]} tokens. Buy some first to sell.</span>
         </div>
       )}
 

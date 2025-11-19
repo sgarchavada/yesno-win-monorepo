@@ -21,10 +21,8 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "recharts": "^3.3.0",
-    "sdk": "workspace:*",
     "tailwind-merge": "^3.3.1",
     "thirdweb": "^5.110.4",
-    "utils": "workspace:*",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
