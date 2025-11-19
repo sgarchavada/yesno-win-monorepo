@@ -21,6 +21,6 @@ export const getPredictionContractByAddress = (address: `0x${string}`) => getCon
 
 export const tokenContract = tokenContractAddress ? getContract({
     client: client,
-    address: tokenContractAddress,
+    address: tokenContractAddress as `0x${string}`,
     chain: baseSepolia,
 }) : null;
