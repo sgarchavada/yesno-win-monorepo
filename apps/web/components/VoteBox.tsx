@@ -169,9 +169,9 @@ export default function VoteBox({
                 sponsorGas: true,
               }}
               detailsButton={{
-                displayBalanceToken: {
+                displayBalanceToken: tokenContractAddress ? {
                   [baseSepolia.id]: tokenContractAddress,
-                },
+                } : undefined,
               }}
             />
           </div>

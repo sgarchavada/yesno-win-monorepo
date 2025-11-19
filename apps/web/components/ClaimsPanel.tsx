@@ -23,7 +23,7 @@ export function ClaimsPanel({ market }: ClaimsPanelProps) {
 
   // Modal state
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState<"success" | "error">("success");
+  const [modalType, setModalType] = useState<"success" | "danger">("success");
   const [modalTitle, setModalTitle] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
@@ -35,7 +35,7 @@ export function ClaimsPanel({ market }: ClaimsPanelProps) {
   };
 
   const showError = (error: any) => {
-    setModalType("error");
+    setModalType("danger");
     setModalTitle(getErrorTitle(error));
     setModalMessage(formatErrorMessage(error));
     setShowModal(true);
@@ -72,11 +72,11 @@ export function ClaimsPanel({ market }: ClaimsPanelProps) {
             
             // Only fetch investment if user has tokens for this outcome
             if (balance > BigInt(0)) {
-              const investment = (await readContract({
+              const investment = await readContract({
                 contract: marketContract as any,
                 method: "function userInvestments(address user, uint256 outcomeIndex) view returns (uint256)",
                 params: [account.address, BigInt(i)],
-              } as any)) as bigint;
+              }) as bigint;
               
               totalRefund += investment;
             }

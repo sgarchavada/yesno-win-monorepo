@@ -56,23 +56,23 @@ export default function AdminDashboard() {
   }, [account]);
 
   // Fetch markets
-  useEffect(() => {
-    async function fetchMarkets() {
-      setIsLoading(true);
-      try {
-        const addresses = await getAllMarkets();
-        const marketDetails = await Promise.all(
-          addresses.map((addr) => getMarketDetails(addr))
-        );
-        const validMarkets = marketDetails.filter((m) => m !== null) as Market[];
-        setMarkets(validMarkets);
-      } catch (error) {
-        console.error("Error fetching markets:", error);
-      } finally {
-        setIsLoading(false);
-      }
+  const fetchMarkets = async () => {
+    setIsLoading(true);
+    try {
+      const addresses = await getAllMarkets();
+      const marketDetails = await Promise.all(
+        addresses.map((addr) => getMarketDetails(addr))
+      );
+      const validMarkets = marketDetails.filter((m) => m !== null) as Market[];
+      setMarkets(validMarkets);
+    } catch (error) {
+      console.error("Error fetching markets:", error);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
+  useEffect(() => {
     fetchMarkets();
   }, []);
 

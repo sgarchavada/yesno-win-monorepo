@@ -267,9 +267,9 @@ export default function CreateMarketForm({ onMarketCreated }: CreateMarketFormPr
               sponsorGas: true,
             }}
             detailsButton={{
-              displayBalanceToken: {
+              displayBalanceToken: tokenContractAddress ? {
                 [baseSepolia.id]: tokenContractAddress,
-              },
+              } : undefined,
             }}
           />
         </CardContent>

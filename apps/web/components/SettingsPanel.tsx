@@ -211,6 +211,11 @@ export function SettingsPanel() {
   }, [account]);
 
   async function handleUpdateTreasury() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     if (!newTreasury) {
       showError({ message: "Please enter a treasury address" });
       return;
@@ -239,6 +244,11 @@ export function SettingsPanel() {
   }
 
   async function handleUpdateOracle() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     if (!newOracleAdapter) {
       showError({ message: "Please enter an oracle adapter address" });
       return;
@@ -267,6 +277,11 @@ export function SettingsPanel() {
   }
 
   async function handleUpdateFees() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     if (!newDefaultLpFeeBps && !newDefaultProtocolFeeBps && !newDefaultParlayFeeBps) {
       showError({ message: "Please enter at least one fee parameter" });
       return;
@@ -303,6 +318,11 @@ export function SettingsPanel() {
   }
 
   async function handleUpdateCollateral() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     if (!newDefaultCollateral) {
       showError({ message: "Please enter a collateral token address" });
       return;
@@ -331,6 +351,11 @@ export function SettingsPanel() {
   }
 
   async function handleUpdateLimits() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     if (!newMinInitialLiquidity && !newMaxOutcomes) {
       showError({ message: "Please enter at least one limit parameter" });
       return;
@@ -379,6 +404,11 @@ export function SettingsPanel() {
   }
 
   async function handleToggleCreatorRequests() {
+    if (!account) {
+      showError({ message: "Please connect your wallet" });
+      return;
+    }
+
     setIsLoadingCreatorRequests(true);
 
     try {

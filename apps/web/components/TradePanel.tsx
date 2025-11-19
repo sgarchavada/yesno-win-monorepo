@@ -103,6 +103,8 @@ export function TradePanel({ market }: TradePanelProps) {
     }
 
     async function fetchOutcomeBalances() {
+      if (!account?.address) return;
+      
       try {
         const { readContract } = await import("thirdweb");
         const { getContract } = await import("thirdweb");

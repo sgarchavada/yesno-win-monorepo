@@ -61,9 +61,9 @@ export function OraclePanel({ market }: OraclePanelProps) {
           contract: factory as any,
           method: "function hasRole(bytes32 role, address account) view returns (bool)",
           params: [DEFAULT_ADMIN_ROLE, account.address],
-        } as any);
+        }) as boolean;
 
-        setIsAdmin(hasAdminRole as boolean);
+        setIsAdmin(hasAdminRole);
       } catch (err) {
         console.error("Error checking admin status:", err);
         setIsAdmin(false);
