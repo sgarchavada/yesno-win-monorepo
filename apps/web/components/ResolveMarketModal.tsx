@@ -43,6 +43,9 @@ export default function ResolveMarketModal({
     setIsProcessing(true);
     try {
       const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : predictionMarketContract;
+      if (!contract) {
+        throw new Error("Contract not initialized");
+      }
       const methodSig = "function resolveMarket(uint256 _marketId, uint8 _outcome)";
       // Map UI selection (0=A, 1=B) to contract enum (1=A, 2=B)
       const outcomeForContract = (selectedOutcome === 0 ? 1 : 2) as 1 | 2;

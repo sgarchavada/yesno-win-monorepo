@@ -307,6 +307,9 @@ export default function VoteBox({
                         setIsRefunding(true);
                         try {
                           const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : predictionMarketContract;
+                          if (!contract) {
+                            throw new Error("Contract not initialized");
+                          }
                           const tx = prepareContractCall({
                             contract,
                             method: "function claimRefund(uint256 _marketId)",
@@ -335,6 +338,9 @@ export default function VoteBox({
                         setIsClaiming(true);
                         try {
                           const contract = contractAddress ? getPredictionContractByAddress(contractAddress) : predictionMarketContract;
+                          if (!contract) {
+                            throw new Error("Contract not initialized");
+                          }
                           const tx = prepareContractCall({
                             contract,
                             method: "function claimWinnings(uint256 _marketId)",

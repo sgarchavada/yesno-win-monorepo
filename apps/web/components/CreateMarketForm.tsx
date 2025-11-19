@@ -179,9 +179,15 @@ export default function CreateMarketForm({ onMarketCreated }: CreateMarketFormPr
       const startTimestamp = BigInt(Math.floor(new Date(formData.startTime).getTime() / 1000));
       const endTimestamp = BigInt(Math.floor(new Date(formData.endTime).getTime() / 1000));
 
+      // Get contract instance
+      const contract = predictionMarketContract;
+      if (!contract) {
+        throw new Error("Contract not initialized");
+      }
+
       // Call createMarket on contract
       const transaction = prepareContractCall({
-        contract: predictionMarketContract,
+        contract,
         method: "function createMarket(string _question, uint256 _startTime, uint256 _endTime, string _optionA, string _optionB, uint8 _resolutionType) returns (uint256 marketId)",
         params: [
           formData.question,
