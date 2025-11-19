@@ -9,8 +9,8 @@ export const tokenContractAddress = process.env.NEXT_PUBLIC_USDC_ADDRESS || "";
 
 // Helper function to ensure address is properly formatted
 const toAddress = (addr: string): `0x${string}` => {
-  // Remove any whitespace and convert to lowercase for consistency
-  const cleaned = addr.trim().toLowerCase();
+  // Remove any whitespace but preserve case (for checksummed addresses)
+  const cleaned = addr.trim();
   // Ensure it starts with 0x
   return (cleaned.startsWith('0x') ? cleaned : `0x${cleaned}`) as `0x${string}`;
 };
